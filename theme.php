@@ -21,11 +21,24 @@ class Dojo extends Theme
 	}
 
 	/**
-	* Add the stylesheet
-	*/
+	 * Add the stylesheet
+	 */
 	public function action_template_header($theme)
 	{
 		Stack::add('template_stylesheet', array($this->get_url().'/style.css', 'screen,projection'), 'theme');
+	}
+
+	/**
+	 * Work out what the title should be.
+	 */
+	public function theme_title($theme)
+	{
+		// if search "Search for $criteria"
+		// if 404 "404: Page Not Found"
+		// if archive " archive "
+		// if not home { echo " at "; }
+		$title .= Options::out('title' );
+		return $title;
 	}
 
 }
