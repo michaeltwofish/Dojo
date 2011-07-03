@@ -15,7 +15,7 @@ class Dojo extends Theme
 		// Apply Format::tag_and_list() to post tags...
 		Format::apply('tag_and_list', 'post_tags_out');
 		// Apply Format::nice_date() to post date...
-		Format::apply('nice_date', 'post_pubdate_out', 'F d, Y');
+		Format::apply('nice_date', 'post_pubdate_out', 'l, F j, Y \a\t g:ia');
 		// Apply Format::nice_date() to comment date...
 		Format::apply('nice_date', 'comment_date_out', 'F d, Y \a\t g:ia');
 	}
@@ -41,6 +41,17 @@ class Dojo extends Theme
 		return $title;
 	}
 
+	/**
+	 * Work out the post's classes.
+	 */
+	public function theme_post_class($theme, $post)
+	{
+		$class = "post-{$post->id} type-{$post->typename} status-{$post->statusname} ";
+		foreach ( $post->tags as $tag ) {
+			$class .= "tag-{$tag->term_display}";
+		}
+		return $class;
+	}
 }
 
 ?>
