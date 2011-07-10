@@ -52,6 +52,18 @@ class Dojo extends Theme
 		}
 		return $class;
 	}
+
+	/**
+	 * Add additional template variables to the template output.
+	 *
+	 */
+	public function add_template_vars()
+	{
+		$this->entry_count(Posts::get(array('content_type' => 'page', 'status' => Post::status('published'), 'count' => '*')));
+		$this->comment_count(Comments::get(array()));
+		parent::add_template_vars();
+	}
+
 }
 
 ?>
